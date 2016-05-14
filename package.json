@@ -1,0 +1,41 @@
+{
+  "name": "swanky-ngdocs",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "dgeni": "^0.4.2",
+    "dgeni-packages": "^0.12.0",
+    "he": "^1.0.0"
+  },
+  "devDependencies": {
+    "codecov.io": "^0.1.6",
+    "css-modules-require-hook": "^4.0.0",
+    "cz-conventional-changelog": "^1.1.6",
+    "cz-customizable": "^4.0.0",
+    "semantic-release": "^4.3.5",
+    "stylus": "^0.54.5",
+    "validate-commit-msg": "^2.6.1"
+  },
+  "config": {
+    "ghooks": {
+      "commit-msg": "validate-commit-msg"
+    },
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    },
+    "cz-customizable": {
+      "config": ".cz-config.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rodleviton/swanky-ngdocs.git"
+  }
+}
