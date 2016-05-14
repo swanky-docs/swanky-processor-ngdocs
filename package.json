@@ -1,7 +1,7 @@
 {
   "name": "swanky-ngdocs",
   "version": "0.0.0-semantically-released",
-  "description": "Angular Documentation plugin for Swanky Docs.",
+  "description": "Angular Documentation plugin for Swanky Docs",
   "main": "index.js",
   "scripts": {
     "commit": "git-cz",
