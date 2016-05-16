@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "commit": "git-cz",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha test/spec/unit/*.spec.js -w",
+    "test:single": "istanbul cover _mocha -- -R spec test/spec/unit/*.spec.js",
+    "check-coverage": "istanbul check-coverage --statements 0 --branches 0 --functions 0 --lines 0",
+    "report-coverage": "cat ./coverage/coverage.raw.json | codecov",
+    "start": "node ./tasks/build.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "author": "Rod Leviton",
@@ -39,6 +43,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rodleviton/swanky-ngdocs.git"
+    "url": "https://github.com/swanky-docs/swanky-ngdocs.git"
   }
 }
