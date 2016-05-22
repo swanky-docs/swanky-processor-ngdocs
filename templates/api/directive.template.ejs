@@ -1,0 +1,29 @@
+<%- include('../lib/macros.ejs') -%>
+<%- include('./api.template.ejs') -%>
+
+<h3>Info</h3>
+<ul class="<%-styles['list-unstyled']-%>">
+  <% if (doc.scope) { %><li>This directive creates new scope.</li><% } %>
+  <li>This directive executes at priority level <%- doc.priority -%>.</li>
+  <% if (doc.multiElement) { %><li>This directive can be used as {@link $compile#-multielement- multiElement}</li><% } %>
+</ul>
+
+<h3>Usage</h3>
+<div class="<%-styles['code-snippet']-%>">
+<% if (doc.examples) { %>
+  <% doc.examples.forEach((example) => { %>
+    <div class="<%-styles['code-preview']-%>">
+    <%- example -%>
+    </div>
+  <% if (doc.usage) { %><pre class="line-numbers"><code class="language-markup"><%- doc.usage -%></code></pre><% } %>
+  <% }); %>
+<% } %>
+</div>
+
+<% if (doc.animations) { %>
+<h3>Animations</h2>
+<%- doc.animations -%>
+<% } %>
+
+<%- include('../lib/params.template.ejs') -%>
+<%- include('../lib/events.template.ejs') -%>

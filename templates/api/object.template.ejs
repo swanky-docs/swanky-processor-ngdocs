@@ -1,0 +1,20 @@
+<%- include('../lib/macros.ejs') -%>
+<%- include('./api.template.ejs') -%>
+
+
+<% if (doc.params || doc.returns || doc.this || doc.kind === 'function') { %>
+  <h3 id="usage">Usage</h3>
+  <% if (doc.usage) { %>
+    <%- doc.usage -%>
+  <% } else { %>
+    **ref: object.template.html**
+  <% } %>
+
+  <%- // include('../lib/params.template.ejs') -%>
+  <%- // include('../lib/this.template.ejs') -%>
+  <%- // include('../lib/returns.template.ejs') -%>
+<% } %>
+
+<%- // include('../lib/methods.template.ejs') -%>
+<%- // include('../lib/events.template.ejs') -%>
+<%- // include('../lib/properties.template.ejs') -%>

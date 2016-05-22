@@ -1,0 +1,32 @@
+<h2><%- doc.name -%></h1>
+
+<div class="api-profile-description">
+  <%- doc.description -%>
+</div>
+
+<% if (doc.knownIssues) { %>
+<h3>Known Issues</h2>
+<% doc.knownIssues.forEach((issue) => { %>
+<div class="known-issue">
+  <%- issue -%>
+</div>
+<% }); -%>
+<% } %>
+
+<% if (doc.deprecated) { %>
+<fieldset class="deprecated">
+  <legend>Deprecated API</legend>
+  <%- doc.deprecated -%>
+</fieldset>
+<% } %>
+
+<div>
+  <% if (doc.requires) { %>
+  <h3>Dependencies</h3>
+  <ul>
+    <% doc.requires.forEach((require) => { %>
+      <li>Add link here</li>
+    <% }); %>
+  </ul>
+  <% } %>
+</div>
