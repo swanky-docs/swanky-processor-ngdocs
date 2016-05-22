@@ -16,23 +16,25 @@
   "license": "MIT",
   "dependencies": {
     "async": "^2.0.0-rc.3",
-    "dgeni": "^0.4.2",
-    "dgeni-packages": "^0.12.0",
-    "ejs": "^2.4.1",
-    "he": "^1.0.0"
-  },
-  "devDependencies": {
+    "chai": "^3.5.0",
     "codecov.io": "^0.1.6",
     "css-modules-require-hook": "^4.0.0",
     "cz-conventional-changelog": "1.1.5",
     "cz-customizable": "3.1.0",
+    "dgeni": "^0.4.2",
+    "dgeni-packages": "^0.12.0",
+    "ejs": "^2.4.1",
     "exact-semver": "1.2.0",
+    "he": "^1.0.0",
+    "mocha": "^2.4.5",
     "semantic-release": "^4.3.5",
+    "sinon": "^1.17.4",
     "stylus": "^0.54.5",
     "validate-commit-msg": "^2.6.0"
   },
   "config": {
     "ghooks": {
+      "pre-commit": "npm run test:single && npm run check-coverage && exact-semver",
       "commit-msg": "validate-commit-msg"
     },
     "commitizen": {
