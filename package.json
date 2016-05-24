@@ -1,5 +1,5 @@
 {
-  "name": "swanky-ngdocs",
+  "name": "swanky-processor-ngdocs",
   "version": "0.0.0-semantically-released",
   "description": "Angular Documentation plugin for Swanky Docs",
   "main": "index.js",
@@ -47,6 +47,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/swanky-docs/swanky-ngdocs.git"
+    "url": "https://github.com/swanky-docs/swanky-processor-ngdocs.git"
   }
 }
