@@ -1,20 +1,20 @@
 <h2><%- doc.name -%></h1>
 
-<div class="api-profile-description">
+<div class="<%-styles['api-section']-%>">
   <%- doc.description -%>
 </div>
 
 <% if (doc.knownIssues) { %>
-<h3>Known Issues</h2>
+<h3>Known Issues</h3>
 <% doc.knownIssues.forEach((issue) => { %>
-<div class="known-issue">
+<div class="<%-styles['known-issue']-%>">
   <%- issue -%>
 </div>
 <% }); -%>
 <% } %>
 
 <% if (doc.deprecated) { %>
-<fieldset class="deprecated">
+<fieldset class="<%-styles['deprecated']-%>">
   <legend>Deprecated API</legend>
   <%- doc.deprecated -%>
 </fieldset>

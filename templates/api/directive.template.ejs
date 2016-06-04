@@ -1,29 +1,40 @@
-<%- include('../lib/macros.ejs') -%>
-<%- include('./api.template.ejs') -%>
+<div class="<%-styles.ngdocs-%>">
+  <%- include('../lib/macros.ejs') -%>
 
-<h3>Info</h3>
-<ul class="<%-styles['list-unstyled']-%>">
-  <% if (doc.scope) { %><li>This directive creates new scope.</li><% } %>
-  <li>This directive executes at priority level <%- doc.priority -%>.</li>
-  <% if (doc.multiElement) { %><li>This directive can be used as {@link $compile#-multielement- multiElement}</li><% } %>
-</ul>
+  <div class="<%-styles['text-block']-%>">
+  <%- include('./api.template.ejs') -%>
+  </div>
+  
+  <h3>Info</h3>
+  <ul class="<%-styles['list-unstyled']-%>">
+    <% if (doc.scope) { %><li>This directive creates new scope.</li><% } %>
+    <li>This directive executes at priority level <%- doc.priority -%>.</li>
+    <% if (doc.multiElement) { %><li>This directive can be used as {@link $compile#-multielement- multiElement}</li><% } %>
+  </ul>
+  
 
-<h3>Usage</h3>
+  <%- include('../lib/params.template.ejs') -%>
+  <%- include('../lib/events.template.ejs') -%>
+
+  <h3>Usage</h3>
+
 <div class="<%-styles['code-snippet']-%>">
+<div class="<%-styles['window-bar']-%>"><div class="<%-styles.circles-%>"><span class="<%-styles.circle-%> <%-styles['circle-red']-%>"></span><span class="<%-styles.circle-%> <%-styles['circle-yellow']-%>"></span><span class="<%-styles.circle-%> <%-styles['circle-green']-%>"></span></div></div>
 <% if (doc.examples) { %>
-  <% doc.examples.forEach((example) => { %>
-    <div class="<%-styles['code-preview']-%>">
-    <%- example -%>
-    </div>
-  <% if (doc.usage) { %><pre class="line-numbers"><code class="language-markup"><%- doc.usage -%></code></pre><% } %>
-  <% }); %>
+<% doc.examples.forEach((example) => { %>
+<div class="<%-styles['code-preview']-%>">
+<div class="<%-styles['isolate-scope-root']-%>">
+<div class="<%-styles['isolate-scope']-%>">
+<%- example -%>
+</div>
+</div>
+</div>
+<% if (doc.usage) { %><pre class="line-numbers"><code class="language-markup"><%- doc.usage -%></code></pre><% } %><% }); %>
 <% } %>
 </div>
 
-<% if (doc.animations) { %>
-<h3>Animations</h2>
-<%- doc.animations -%>
-<% } %>
-
-<%- include('../lib/params.template.ejs') -%>
-<%- include('../lib/events.template.ejs') -%>
+  <% if (doc.animations) { %>
+  <h3>Animations</h3>
+  <%- doc.animations -%>
+  <% } %>
+</div>
