@@ -36,6 +36,7 @@ var swankyNgdocs = function (page, meta, cb) {
         doc: doc,
         styles: meta.cssMap
       }));
+
     });
 
     cb(null);
