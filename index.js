@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const Dgeni = require('dgeni');
 const ejs = require('ejs');
+const basepath = process.cwd();
 const NgDocsBuilder = require('./lib/NgDocsBuilder');
 
 var swankyNgdocs = function (page, meta, cb) {
@@ -15,16 +16,19 @@ var swankyNgdocs = function (page, meta, cb) {
 
   dgeni.generate().then(function (docs) {
     page.processorOutput = [];
-    
+
     // Render each doc here
     docs.forEach((doc, index) => {
 
-      // TODO
-      // Read template location from Swanky config
-      var partialTemplate = path.resolve(__dirname, `./templates/api/${doc.docType}.template.ejs`);
+      var partialTemplate;
 
-      // TODO
-      // Make this async
+      // Read template location from Swanky config
+      if (page.processor.ngdocs && page.processor.ngdocs.hasOwnProperty('templates')) {
+        partialTemplate = path.join(basepath, `${page.processor.ngdocs.templates}/${doc.docType}.template.ejs`);
+      } else {
+        partialTemplate = path.join(__dirname, `./templates/api/${doc.docType}.template.ejs`);
+      }
+
       var str = fs.readFileSync(partialTemplate, 'utf-8');
 
       var options = {
