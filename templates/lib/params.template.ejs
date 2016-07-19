@@ -1,6 +1,34 @@
 <% if (doc.params) { %>
 <section class="<%-styles['api-section']-%>">
   <h3>Arguments</h3>
-  * Create params table helper *
+  <table class="<%-styles['variables-matrix']-%> <%-styles['input-arguments']-%>">
+    <thead>
+    <tr>
+      <th>Param</th>
+      <th>Type</th>
+      <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% doc.params.forEach(function(param) { %>
+    <tr>
+      <td>
+        <%- param.name -%>
+        <% if(param.alias) { %>| <%- param.alias -%><% } %>
+        <% if(param.optional) { %><div><em>(optional)</em></div><% } %>
+      </td>
+      <td>
+        <% param.typeList.forEach(function(typeName){ %>
+          <a href="" class="<%- typeName -%>"><%- typeName -%></a>
+        <% }); %>
+      </td>
+      <td>
+        <%- param.description -%>
+        <% if(param.defaultValue) { %><p><em>(default: <%- param.defaultValue -%>)</em></p><% } %>
+      </td>
+    </tr>
+    <% }); %>
+    </tbody>
+  </table>
 </section>
 <% } %>
