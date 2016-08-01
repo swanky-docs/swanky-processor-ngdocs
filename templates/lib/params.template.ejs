@@ -1,30 +1,30 @@
 <% if (doc.params) { %>
 <section class="<%-styles['api-section']-%>">
-  <h3>Arguments</h3>
-  <table class="<%-styles['variables-matrix']-%> <%-styles['input-arguments']-%>">
-    <thead>
-    <tr>
-      <th>Param</th>
-      <th>Type</th>
-      <th>Details</th>
+  <h4 class="<%-styles['h4']-%>">Arguments</h4>
+  <table class="<%-styles['variables-matrix']-%> <%-styles['input-arguments']-%> <%-styles['table']-%>">
+    <thead class="<%-styles['thead']-%>">
+    <tr class="<%-styles['tr']-%>">
+      <th class="<%-styles['th']-%>">Param</th>
+      <th class="<%-styles['th']-%>">Type</th>
+      <th class="<%-styles['th']-%>">Details</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="<%-styles['tbody']-%>">
     <% doc.params.forEach(function(param) { %>
-    <tr>
-      <td>
+    <tr class="<%-styles['tr']-%>">
+      <td class="<%-styles['td']-%>">
         <%- param.name -%>
         <% if(param.alias) { %>| <%- param.alias -%><% } %>
-        <% if(param.optional) { %><div><em>(optional)</em></div><% } %>
+        <% if(param.optional) { %><div><em class="<%-styles['em']-%>">(optional)</em></div><% } %>
       </td>
-      <td>
+      <td class="<%-styles['td']-%>">
         <% param.typeList.forEach(function(typeName){ %>
-          <a href="" class="<%- typeName -%>"><%- typeName -%></a>
+          <a href="" class="<%- typeName -%> <%-styles['a']-%>"><%- typeName -%></a>
         <% }); %>
       </td>
-      <td>
+      <td class="<%-styles['td']-%>">
         <%- param.description -%>
-        <% if(param.defaultValue) { %><p><em>(default: <%- param.defaultValue -%>)</em></p><% } %>
+        <% if(param.defaultValue) { %><p class="<%-styles['p']-%>"><em class="<%-styles['em']-%>">(default: <%- param.defaultValue -%>)</em></p><% } %>
       </td>
     </tr>
     <% }); %>
