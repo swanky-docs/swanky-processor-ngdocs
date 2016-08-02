@@ -1,11 +1,11 @@
-<h2><%- doc.name -%></h2>
+<h3 class="<%-styles.h3-%>"><%- doc.name -%></h3>
 
-<div class="<%-styles['api-section']-%>">
-  <%- doc.description -%>
-</div>
+<p class="<%-styles['p']-%>">
+<%- doc.description -%>
+</p>
 
 <% if (doc.knownIssues) { %>
-<h3>Known Issues</h3>
+<h4 class="<%-styles.h4-%>">Known Issues</h4>
 <% doc.knownIssues.forEach((issue) => { %>
 <div class="<%-styles['known-issue']-%>">
   <%- issue -%>
@@ -14,18 +14,18 @@
 <% } %>
 
 <% if (doc.deprecated) { %>
-<fieldset class="<%-styles['deprecated']-%>">
-  <legend>Deprecated API</legend>
+<fieldset class="<%-styles['deprecated']-%> <%-styles['fieldset']-%>">
+  <legend class="<%-styles.legend-%>">Deprecated API</legend>
   <%- doc.deprecated -%>
 </fieldset>
 <% } %>
 
 <div>
   <% if (doc.requires) { %>
-  <h3>Dependencies</h3>
-  <ul>
+  <h4 class="<%-styles.h4-%>">Dependencies</h4>
+  <ul class="<%-styles.ul-%>">
     <% doc.requires.forEach((require) => { %>
-      <li>Add link here</li>
+      <li class="<%-styles.li-%>">Add link here</li>
     <% }); %>
   </ul>
   <% } %>
