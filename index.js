@@ -1,36 +1,31 @@
-const assert = require('assert');
-const async = require('async');
+"use strict"
+
 const fs = require('fs');
 const path = require('path');
 const Dgeni = require('dgeni');
 const ejs = require('ejs');
-const basepath = process.cwd();
+const basePath = process.cwd();
 const NgDocsBuilder = require('./lib/NgDocsBuilder');
 
-var swankyNgdocs = function (page, meta, cb) {
-  ngDocsBuilder = new NgDocsBuilder(page);
-
-  var packages = [ngDocsBuilder.Package];
-
-  var dgeni = new Dgeni(packages);
+const swankyNgdocs = function (page, item, cb) {
+  const ngDocsBuilder = new NgDocsBuilder(item);
+  const packages = [ngDocsBuilder.Package];
+  const dgeni = new Dgeni(packages);
 
   dgeni.generate().then(function (docs) {
-    page.processorOutput = [];
-
     // Render each doc here
-    docs.forEach((doc, index) => {
+    docs.forEach((doc /* index */) => {
 
-      var partialTemplate;
+      let partialTemplate;
 
       // Read template location from Swanky config
-      if (page.processor.ngdocs && page.processor.ngdocs.hasOwnProperty('templates')) {
-        partialTemplate = path.join(basepath,
-          `${page.processor.ngdocs.templates}/${doc.docType}.template.ejs`);
+      if (item.preprocessor.ngdocs && item.preprocessor.ngdocs.hasOwnProperty('templates')) {
+        partialTemplate = path.join(basePath, `${item.preprocessor.ngdocs.templates}/${doc.docType}.template.ejs`);
       } else {
         partialTemplate = path.join(__dirname, `./templates/api/${doc.docType}.template.ejs`);
       }
 
-      var str;
+      let str;
 
       try {
         str = fs.readFileSync(partialTemplate, 'utf-8');
@@ -39,17 +34,20 @@ var swankyNgdocs = function (page, meta, cb) {
         process.exit(1);
       }
 
-      // Add file deps for live reload / webpack implementation
-      page.fileDependencies.push(partialTemplate);
+      // Add file dependencies for live reload / webpack implementation
+      page.fileDependencies.push({
+        contentSrc: [partialTemplate], // expects an array
+        type:'template'
+      });
 
       var options = {
         filename: partialTemplate,
         cache: true
       };
 
-      page.processorOutput.push(ejs.compile(str, options)({
+      item.rawContent.push(ejs.compile(str, options)({
         doc: doc,
-        styles: meta.cssMap
+        styles: page.meta.cssMap
       }));
 
     });
