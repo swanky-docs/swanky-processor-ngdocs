@@ -1,25 +1,47 @@
 {
   "name": "swanky-processor-ngdocs",
-  "version": "0.0.0-semantically-released",
   "description": "Angular Documentation plugin for Swanky Docs",
-  "main": "index.js",
-  "scripts": {
-    "commit": "git-cz",
-    "test": "mocha test/spec/unit/*.spec.js -w",
-    "test:single": "istanbul cover _mocha -- -R spec test/spec/unit/*.spec.js",
-    "check-coverage": "istanbul check-coverage --statements 0 --branches 0 --functions 0 --lines 0",
-    "report-coverage": "cat ./coverage/coverage.raw.json | codecov",
-    "start": "node ./tasks/build.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  "homepage": "https://github.com/swanky-docs/swanky-processor-ngdocs#readme",
+  "bugs": {
+    "url": "https://github.com/swanky-docs/swanky-processor-ngdocs/issues"
   },
+  "license": "ISC",
   "author": "Rod Leviton",
-  "license": "MIT",
+  "main": "src/index.js",
+  "scripts": {
+    "pre-release": "npm-run-all verify test:coverage build ",
+    "build": "npm run clean:prod",
+    "clean:prod": "rimraf dist/",
+    "commit": "git-cz",
+    "dev": "npm run verify:watch",
+    "exact-semver": "exact-semver",
+    "report-coverage": "cat ./reports/coverage.json | codecov",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "npm run dev",
+    "test": "npm run test:unit",
+    "test:check-coverage": "istanbul check-coverage reports/coverage.json --config config/testUnit/istanbul.yml",
+    "test:coverage": "npm-run-all test:unit:once test:check-coverage --silent",
+    "test:unit": "chokidar 'src/**/*.js' 'test/**/*.js' -c 'npm run test:unit:once' --initial --silent",
+    "test:unit:once": "istanbul cover --config config/testUnit/istanbul.yml _mocha -- --opts config/testUnit/mocha.opts",
+    "verify": "npm run verify:js --silent",
+    "verify:js": "eslint -c config/verify/.eslintrc \"src/**/*.js\" \"test/**/*.js\" \"config/**/*.js\" && echo ✅ verify:js success",
+    "verify:js:watch": "chokidar 'src/**/*.js' 'test/**/*.js' 'config/**/*.js' -c 'npm run verify:js' --initial --silent",
+    "verify:watch": "npm run verify:js:watch --silent"
+  },
   "devDependencies": {
     "chai": "3.5.0",
+    "chokidar-cli": "1.2.0",
     "codecov.io": "0.1.6",
     "cz-conventional-changelog": "1.1.5",
     "cz-customizable": "4.0.0",
+    "cz-customizable-ghooks": "1.2.0",
+    "eslint": "1.10.3",
+    "eslint-config-defaults": "8.0.2",
+    "exact-semver": "1.2.0",
+    "ghooks": "1.2.1",
     "istanbul": "0.4.3",
+    "npm-run-all": "2.1.1",
+    "rimraf": "2.5.2",
     "exact-semver": "1.2.0",
     "mocha": "2.4.5",
     "semantic-release": "4.3.5",
@@ -27,22 +49,23 @@
     "validate-commit-msg": "2.6.0"
   },
   "dependencies": {
-    "async": "2.0.0-rc.3",
+    "async": "2.0.1",
     "dgeni": "0.4.2",
-    "dgeni-packages": "0.12.0",
+    "dgeni-packages": "0.14.0",
     "ejs": "2.4.1",
     "he": "1.0.0"
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test:single && npm run check-coverage && exact-semver",
-      "commit-msg": "validate-commit-msg"
+      "pre-commit": "npm run exact-semver",
+      "commit-msg": "./node_modules/cz-customizable-ghooks/lib/index.js $2",
+      "pre-push": "npm-run-all verify test:unit:once --silent"
     },
     "commitizen": {
       "path": "node_modules/cz-customizable"
     },
     "cz-customizable": {
-      "config": ".cz-config.js"
+      "config": "config/release/commitMessageConfig.js"
     }
   },
   "repository": {

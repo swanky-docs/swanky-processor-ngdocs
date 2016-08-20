@@ -1,8 +1,9 @@
 sudo: false
 language: node_js
-cache:
-  directories:
-    - node_modules
+# Beware of the cache!
+#cache:
+#  directories:
+#    - node_modules
 notifications:
   email: false
 node_js:
@@ -11,8 +12,7 @@ node_js:
 before_script:
   - npm prune
 script:
-  - npm run test:single
-  - npm run check-coverage
+  - npm run pre-release
 after_success:
   - npm run report-coverage
   - npm run semantic-release
