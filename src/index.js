@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 const fs = require('fs');
 const path = require('path');
@@ -7,14 +7,14 @@ const ejs = require('ejs');
 const basePath = process.cwd();
 const NgDocsBuilder = require('./lib/NgDocsBuilder');
 
-const swankyNgdocs = function (page, item, cb) {
+const swankyNgdocs = function(page, item, cb) {
   const ngDocsBuilder = new NgDocsBuilder(item);
   const packages = [ngDocsBuilder.Package];
   const dgeni = new Dgeni(packages);
 
-  dgeni.generate().then(function (docs) {
+  dgeni.generate().then(function(docs) {
     // Render each doc here
-    docs.forEach((doc /* index */) => {
+    docs.forEach((doc) => {
 
       let partialTemplate;
 
@@ -37,10 +37,10 @@ const swankyNgdocs = function (page, item, cb) {
       // Add file dependencies for live reload / webpack implementation
       page.fileDependencies.push({
         contentSrc: [partialTemplate], // expects an array
-        type:'template'
+        type: 'template'
       });
 
-      var options = {
+      let options = {
         filename: partialTemplate,
         cache: true
       };

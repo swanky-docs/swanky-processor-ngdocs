@@ -19,7 +19,7 @@
   </div>
 </div>
 <div class="<%- styles['code-wrapper'] -%> sd-panel">
-<pre class="line-numbers"><code class="language-markup"><%- doc.usage -%></code></pre><% } %><% }); %>
+  <pre class="line-numbers"><code class="language-markup"><%- doc.usage -%></code></pre><% } %><% }); %>
 </div>
 <% } %>
 </div>
@@ -34,9 +34,8 @@
 <ul class="<%-styles['ul']-%>">
   <% if (doc.scope) { %><li class="<%-styles['li']-%>">This directive creates new scope.</li><% } %>
   <li class="<%-styles['li']-%>">This directive executes at priority level <%- doc.priority -%>.</li>
-  <% if (doc.multiElement) { %><li class="<%-styles['li']-%>">This directive can be used as {@link $compile#-multielement- multiElement}</li><% } %>
+  <% if (doc.multiElement) { %><li class="<%-styles['li']-%>">This directive can be used as {@link $compile#-multielement-multiElement}</li><% } %>
 </ul>
-
 
 <%- include('../lib/params.template.ejs') -%>
 <%- include('../lib/events.template.ejs') -%>

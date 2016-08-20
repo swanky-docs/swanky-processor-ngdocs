@@ -1,9 +1,8 @@
-var expect = require('chai').expect;
-var swankyNgdocs = require('../../../index');
-var sinon = require('sinon');
+const expect = require('chai').expect;
+const swankyNgdocs = require('../../../src/index');
 
-describe('swankyNgdocs', function () {    
-  it('should exist', function () {
+describe('swankyNgdocs', () => {
+  it('should exist', () => {
     expect(swankyNgdocs).to.be.a('Function');
   });
 });

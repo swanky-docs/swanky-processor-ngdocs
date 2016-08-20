@@ -16,31 +16,24 @@ module.exports = {
   ],
 
   scopes: [
-    {name: 'git'},
-    {name: 'build'},
-    {name: 'contributing'},    
-    {name: 'docs'},
-    {name: 'license'},
-    {name: 'boilerplate'},
-    {name: 'release'},
-    {name: 'testBrowser'},
-    {name: 'testUnit'},
-    {name: 'paths'},
-    {name: 'app'}
+    {name: 'accounts'},
+    {name: 'admin'},
+    {name: 'exampleScope'},
+    {name: 'changeMe'}
   ],
 
   // it needs to match the value for field type. Eg.: 'fix'
   /*
-  scopeOverrides: {
-    fix: [
+   scopeOverrides: {
+   fix: [
 
-      {name: 'merge'},
-      {name: 'style'},
-      {name: 'e2eTest'},
-      {name: 'unitTest'}
-    ]
-  },
-  */
+   {name: 'merge'},
+   {name: 'style'},
+   {name: 'e2eTest'},
+   {name: 'unitTest'}
+   ]
+   },
+   */
 
   allowCustomScopes: true,
   allowBreakingChanges: ['feat', 'fix']
