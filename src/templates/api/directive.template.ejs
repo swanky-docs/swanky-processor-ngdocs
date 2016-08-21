@@ -2,11 +2,10 @@
 <%- include('./api.template.ejs') -%>
 <%- doc.overview -%>
 <h4 class="<%-styles.h4-%>">Example</h4>
-
 <div class="<%-styles['code-snippet']-%>">
 <% if (doc.examples) { %>
 <% doc.examples.forEach((example) => { %>
-<div class="<%-styles['code-preview']-%>">
+<div data-test-id="component-example" class="<%-styles['code-preview']-%> component-example-<%- doc.aliases[0] -%>">
 <%- example -%>
 </div>
 <% if (doc.usage) { %>
