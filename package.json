@@ -42,7 +42,6 @@
     "istanbul": "0.4.3",
     "npm-run-all": "2.1.1",
     "rimraf": "2.5.2",
-    "exact-semver": "1.2.0",
     "mocha": "2.4.5",
     "semantic-release": "4.3.5",
     "sinon": "1.17.4",
@@ -53,7 +52,8 @@
     "dgeni": "0.4.2",
     "dgeni-packages": "0.14.0",
     "ejs": "2.5.1",
-    "he": "1.1.0"
+    "he": "1.1.0",
+    "showdown": "1.4.3"
   },
   "config": {
     "ghooks": {

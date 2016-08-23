@@ -12,6 +12,7 @@ NgDocsBuilder.prototype.Package = new Package('ngdocs-builder', [
 ])
 // Encode code examples
   .processor(require('./encode'))
+  .processor(require('./markdown'))
 
   // Configure output
   .config(function(log, readFilesProcessor, writeFilesProcessor) {
