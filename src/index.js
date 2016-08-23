@@ -19,8 +19,8 @@ const swankyNgdocs = function(page, item, cb) {
       let partialTemplate;
 
       // Read template location from Swanky config
-      if (item.preprocessor.ngdocs && item.preprocessor.ngdocs.hasOwnProperty('templates')) {
-        partialTemplate = path.join(basePath, `${item.preprocessor.ngdocs.templates}/${doc.docType}.template.ejs`);
+      if (item.preprocessor['swanky-processor-ngdocs'] && item.preprocessor['swanky-processor-ngdocs'].hasOwnProperty('templates')) {
+        partialTemplate = path.join(basePath, `${item.preprocessor['swanky-processor-ngdocs'].templates}/${doc.docType}.template.ejs`);
       } else {
         partialTemplate = path.join(__dirname, `./templates/api/${doc.docType}.template.ejs`);
       }
