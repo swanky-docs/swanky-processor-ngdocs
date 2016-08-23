@@ -1,4 +1,7 @@
+'use strict';
+
 const he = require('he');
+const codeBlockRegex = /```([a-z]*)\n([\s\S]*)?\n```/g;
 
 module.exports = function encode() {
   return {
@@ -7,7 +10,13 @@ module.exports = function encode() {
     $process: function(docs) {
       docs.forEach(function(doc) {
         if (doc.usage) {
-          doc.usage = he.encode(doc.usage);
+          let usage = doc.usage;
+
+          usage.replace(codeBlockRegex, (match, type, example) => {
+            let languageType = type ? `language-${type}` : `language-markup`;
+
+            doc.usage = `<code class="${languageType}">${he.encode(example)}</code>`;
+          });
         }
       });
     }
