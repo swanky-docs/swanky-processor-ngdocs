@@ -2,69 +2,83 @@
 {% extends "api/api.template.html" %}
 
 {% block additional %}
-  <h2>Directive Info</h2>
-  <ul>
-    {% if doc.scope %}<li>This directive creates new scope.</li>{% endif %}
-    <li>This directive executes at priority level {$ doc.priority $}.</li>
-    {% if doc.multiElement %}<li>This directive can be used as {@link $compile#-multielement- multiElement}</li>{% endif %}
-  </ul>
-
   {% block usage %}
-  <h2 id="usage">Usage</h2>
-  <div class="usage">
-  {% if doc.usage %}
-    {$ doc.usage | marked $}
-  {% else %}
-    <ul>
-    {% if doc.restrict.element %}
-      <li>as element:
-      {% if doc.name.indexOf('ng') == 0 -%}
-      (This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>).
+    <div class="{$ styles['code-snippet'] $}">
+      {% if doc.usage %}
+        <h4 class="{$ styles.h4 $}">Code Example</h4>
+        <div class="{$ styles['window-bar'] $} sd-accordion">
+          <div class="{$ styles.circles $}">
+            <span class="{$ styles.circle $} {$ styles['circle-red'] $}"></span>
+            <span class="{$ styles.circle $} {$ styles['circle-yellow'] $}"></span>
+            <span class="{$ styles.circle $} {$ styles['circle-green'] $}"></span>
+          </div>
+        </div>
+        <div class="{$ styles['code-wrapper'] $} sd-panel">
+          {$ doc.usage | marked $}
+        </div>
+      {% else %}
+        <ul class="{$ styles.ul $}">
+          {% if doc.restrict.element %}
+            <li class="{$ styles.li $}">as element:
+              {% if doc.name.indexOf('ng') == 0 -%}
+                (This directive can be used as custom element, but be aware of <a href="guide/ie">IE restrictions</a>).
+              {%- endif %}
+              {% code %}
+              <{$ doc.name | dashCase $}
+              {%- for param in doc.params %}
+              {$ directiveParam(param.alias or param.name, param.type, '="', '"') $}
+              {%- endfor %}>
+              ...
+            </{$ doc.name | dashCase $}>
+            {% endcode %}
+            </li>
+          {% endif -%}
+
+          {%- if doc.restrict.attribute -%}
+            <li class="{$ styles.li $}">as attribute:
+              {% code %}
+              <{$ doc.element $}
+              {%- for param in doc.params %}
+              {$ directiveParam(param.name, param.type, '="', '"') $}
+              {%- endfor %}>
+              ...
+            </{$ doc.element $}>
+            {% endcode %}
+            </li>
+          {% endif -%}
+
+          {%- if doc.restrict.cssClass -%}
+            <li class="{$ styles.li $}">as CSS class:
+              {% code %}
+              {% set sep = joiner(' ') %}
+              <{$ doc.element $} class="
+              {%- for param in doc.params -%}
+              {$ sep() $}{$ directiveParam(param.name, param.type, ': ', ';') $}
+              {%- endfor %}"> ...
+            </{$ doc.element $}>
+            {% endcode %}
+            </li>
+          {% endif -%}
+        </ul>
       {%- endif %}
-      {% code %}
-      <{$ doc.name | dashCase $}
-        {%- for param in doc.params %}
-        {$ directiveParam(param.alias or param.name, param.type, '="', '"') $}
-        {%- endfor %}>
-      ...
-      </{$ doc.name | dashCase $}>
-      {% endcode %}
-      </li>
-    {% endif -%}
-
-    {%- if doc.restrict.attribute -%}
-      <li>as attribute:
-        {% code %}
-        <{$ doc.element $}
-          {%- for param in doc.params %}
-          {$ directiveParam(param.name, param.type, '="', '"') $}
-          {%- endfor %}>
-        ...
-        </{$ doc.element $}>
-        {% endcode %}
-      </li>
-    {% endif -%}
-
-    {%- if doc.restrict.cssClass -%}
-      <li>as CSS class:
-        {% code %}
-        {% set sep = joiner(' ') %}
-        <{$ doc.element $} class="
-        {%- for param in doc.params -%}
-          {$ sep() $}{$ directiveParam(param.name, param.type, ': ', ';') $}
-        {%- endfor %}"> ... </{$ doc.element $}>
-        {% endcode %}
-      </li>
-    {% endif -%}
-
-  {%- endif %}
-  </div>
+    </div>
   {% endblock -%}
 
+  <h4 class="{$ styles.h4 $}">General Info</h4>
+  <ul class="{$ styles.ul $}">
+    {% if doc.scope %}
+      <li class="{$ styles.li $}">This directive creates new scope.</li>
+    {% endif %}
+    <li class="{$ styles.li $}">This directive executes at priority level {$ doc.priority $}.</li>
+    {% if doc.multiElement %}
+      <li>This directive can be used as {@link $compile#-multielement- multiElement}</li>
+    {% endif %}
+  </ul>
+
   {%- if doc.animations %}
-  <h2 id="animations">Animations</h2>
-  {$ doc.animations | marked $}
-  {$ 'module:ngAnimate.$animate' | link('Click here', doc) $} to learn more about the steps involved in the animation.
+    <h4 class="{$ styles.h4 $}">Animations</h4>
+    {$ doc.animations | marked $}
+    {$ 'module:ngAnimate.$animate' | link('Click here', doc) $} to learn more about the steps involved in the animation.
   {%- endif -%}
 
   {% include "lib/params.template.html" %}

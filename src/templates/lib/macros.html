@@ -1,28 +1,28 @@
 {% macro typeList(types) -%}
-{% for typeName in types %}<a href="" class="{$ typeName | typeClass $}">{$ typeName | escape $}</a>{% endfor %}
+{% for typeName in types %}<a href="" class="{$ typeName | typeClass $} {$ styles.a $}">{$ typeName | escape $}</a>{% endfor %}
 {%- endmacro -%}
 
 {%- macro paramTable(params) %}
-<table class="variables-matrix input-arguments">
-  <thead>
-    <tr>
-      <th>Param</th>
-      <th>Type</th>
-      <th>Details</th>
+<table class="{$ styles.table $} {$ styles['variables-matrix'] $} {$ styles['input-arguments'] $}">
+  <thead class="{$ styles.thead $}">
+    <tr class="{$ styles.tr $}">
+      <th class="{$ styles.th $}">Param</th>
+      <th class="{$ styles.th $}">Type</th>
+      <th class="{$ styles.th $}">Details</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="{$ styles.thbody $}">
     {% for param in params %}
-    <tr>
-      <td>
+    <tr class="{$ styles.tr $}">
+      <td class="{$ styles.td $}">
         {$ param.name $}
         {% if param.alias %}| {$ param.alias $}{% endif %}
-        {% if param.optional %}<div><em>(optional)</em></div>{% endif %}
+        {% if param.optional %}<div><em class="{$ styles.em $}">(optional)</em></div>{% endif %}
       </td>
-      <td>
+      <td class="{$ styles.td $}">
         {$ typeList(param.typeList) $}
       </td>
-      <td>
+      <td class="{$ styles.td $}">
         {$ param.description | marked $}
         {% if param.defaultValue %}<p><em>(default: {$ param.defaultValue $})</em></p>{% endif %}
       </td>
@@ -35,8 +35,8 @@
 
 {%- macro directiveParam(name, type, join, sep) %}
   {%- if type.optional %}[{% endif -%}
-  {$ name | dashCase $}{$ join $}{$ type.description $}{$ sep $}
-  {%- if type.optional %}]{% endif -%}
+  {$ name | dashCase $}{$ join $}{$ type.name $}{$ sep $}
+{%- if type.optional %}]{% endif -%}
 {% endmacro -%}
 
 {%- macro functionSyntax(fn) %}
@@ -51,10 +51,10 @@
 {% endmacro -%}
 
 {%- macro typeInfo(fn) -%}
-<table class="variables-matrix return-arguments">
-  <tr>
-    <td>{$ typeList(fn.typeList) $}</td>
-    <td>{$ fn.description | marked $}</td>
+<table class="{$ styles.table $} {$ styles['variables-matrix'] $} {$ styles['return-arguments'] $}">
+  <tr class="{$ styles.tr $}">
+    <td class="{$ styles.td $}">{$ typeList(fn.typeList) $}</td>
+    <td class="{$ styles.td $}">{$ fn.description | marked $}</td>
   </tr>
 </table>
 {%- endmacro -%}
