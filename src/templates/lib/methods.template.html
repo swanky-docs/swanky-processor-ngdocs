@@ -1,5 +1,5 @@
 {%- if doc.methods %}
-<h2>Methods</h2>
+<h4 class="{$ styles.h4 $}">Methods</h4>
 <ul class="methods">
   {%- for method in doc.methods %}
   <li id="{$ method.name $}">
@@ -15,7 +15,7 @@
     <h4>Method's {% code %}this{% endcode %}</h4>
     {$ method.this | marked $}
     {% endif %}
-    
+
     {% if method.returns %}
     <h4>Returns</h4>
     {$ typeInfo(method.returns) $}
