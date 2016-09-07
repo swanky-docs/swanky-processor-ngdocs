@@ -51,7 +51,7 @@
   "dependencies": {
     "async": "2.0.1",
     "dgeni": "0.4.2",
-    "dgeni-packages": "0.14.0",
+    "dgeni-packages": "0.15.1",
     "ejs": "2.5.1",
     "he": "1.1.0",
     "lodash": "4.13.1",
