@@ -30,7 +30,7 @@ NgDocsBuilder.prototype.Package = new Package('ngdocs-builder', [
   if (page.item.preprocessor['swanky-processor-ngdocs'] && page.item.preprocessor['swanky-processor-ngdocs'].hasOwnProperty('templates')) {
     templateFinder.templateFolders.push(path.join(process.cwd(), `${page.item.preprocessor['swanky-processor-ngdocs'].templates}/`));
   } else {
-    templateFinder.templateFolders.push(path.join(__dirname, `../templates/`));
+    templateFinder.templateFolders.push(path.join(__dirname, '../templates/'));
   }
 
   let fileDependencies = recursiveReaddirSync(templateFinder.templateFolders[0]);

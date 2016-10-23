@@ -13,7 +13,7 @@ module.exports = function encode() {
           let usage = doc.usage;
 
           usage.replace(codeBlockRegex, (match, type, example) => {
-            let languageType = type ? `language-${type}` : `language-markup`;
+            let languageType = type ? `language-${type}` : 'language-markup';
 
             doc.usage = `<code class="${languageType}">${he.encode(example)}</code>`;
           });
