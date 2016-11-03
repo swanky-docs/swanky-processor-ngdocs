@@ -1,37 +1,20 @@
-# Swanky Ngdocs
-> A most elegant and unopinionated documentation framework
+# swanky-processor-ngdocs 
+[![Build Status](https://travis-ci.org/swanky-docs/swanky-processor-ngdocs.svg?branch=master)](https://travis-ci.org/swanky-docs/swanky-processor-ngdocs) [![npm package](https://img.shields.io/npm/v/swanky-processor-ngdocs.svg)](https://www.npmjs.com/package/swanky-processor-ngdocs) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![codecov](https://codecov.io/gh/swanky-docs/swanky-processor-ngdocs/branch/master/graph/badge.svg)](https://codecov.io/gh/swanky-docs/swanky-processor-ngdocs)
 
+An NgDocs processor for Angular documentation generated using the [Swanky Docs](https://swanky-docs.github.io/) documentation framework.
 
-[![Build Status](https://travis-ci.org/swanky-docs/swanky-processor-ngdocs.svg?branch=master)](https://travis-ci.org/swanky-docs/swanky-processor-ngdocs)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/swanky-docs/swanky-processor-ngdocs)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![codecov.io](https://codecov.io/github/swanky-docs/swanky-processor-ngdocs/coverage.svg?branch=master)](https://codecov.io/github/swanky-docs/swanky-processor-ngdocs?branch=master)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)]()
+### Installation
 
-<!--[RM_INSTALL]-->
-## Install
+Prerequisites: [Node.js](https://nodejs.org/en/) (>=4.x, 6.x preferred) and [Git](https://git-scm.com/).
 
-    npm install swanky-processor-ngdocs
+``` bash
+$ npm install swanky-processor-ngdocs --save
+```
 
-<!--[]-->
+### Usage
 
+This processor is intended to be used as part of the [Swanky Docs](https://swanky-docs.github.io/) documentation framework.
 
-## Usage
+### License
 
-This plugin is designed to be installed via `generator-swanky`.
-
-<!--[RM_CONTRIBUTING]-->
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-
-<!--[]-->
-
-<!--[RM_LICENSE]-->
-## License
-
-This software is licensed under the ISC Licence. See [LICENSE](LICENSE).
-
-<!--[]-->
-
+[MIT](http://opensource.org/licenses/MIT)
