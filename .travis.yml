@@ -1,6 +1,5 @@
 sudo: false
 language: node_js
-# Beware of the cache!
 #cache:
 #  directories:
 #    - node_modules

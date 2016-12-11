@@ -9,27 +9,26 @@
   "author": "Rod Leviton",
   "main": "src/index.js",
   "scripts": {
-    "pre-release": "npm-run-all verify test:coverage build ",
+    "pre-release": "npm-run-all verify test:unit:coverage build ",
     "build": "npm run clean:prod",
-    "clean:prod": "rimraf dist/",
+    "clean:prod": "rimraf build/",
     "commit": "git-cz",
     "dev": "npm run verify:watch",
     "exact-semver": "exact-semver",
-    "report-coverage": "cat ./reports/coverage.json | codecov",
+    "report-coverage": "cat ./coverage/coverage-final.json | codecov",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post",
     "start": "npm run dev",
-    "test": "npm run test:unit",
-    "test:check-coverage": "istanbul check-coverage reports/coverage.json --config config/testUnit/istanbul.yml",
-    "test:coverage": "npm-run-all test:unit:once test:check-coverage --silent",
-    "test:unit": "chokidar 'src/**/*.js' 'test/**/*.js' -c 'npm run test:unit:once' --initial --silent",
-    "test:unit:once": "istanbul cover --config config/testUnit/istanbul.yml _mocha -- --opts config/testUnit/mocha.opts",
+    "jest": "jest",
+    "test": "NODE_ENV=test npm run test:unit",
+    "test:unit": "jest --watch --coverage",
+    "test:unit:debug": "node --debug-brk ./node_modules/.bin/jest -i",
+    "test:unit:coverage": "NODE_ENV=test jest --coverage --silent",
     "verify": "npm run verify:js --silent",
-    "verify:js": "eslint -c config/verify/.eslintrc \"src/**/*.js\" \"test/**/*.js\" \"config/**/*.js\" && echo ✅ verify:js success",
+    "verify:js": "eslint -c config/verify/.eslintrc \"src/**/*.js\" \"test/**/*.js\" \"config/**/*.js\" && echo verify:js success",
     "verify:js:watch": "chokidar 'src/**/*.js' 'test/**/*.js' 'config/**/*.js' -c 'npm run verify:js' --initial --silent",
     "verify:watch": "npm run verify:js:watch --silent"
   },
   "devDependencies": {
-    "chai": "3.5.0",
     "chokidar-cli": "1.2.0",
     "codecov.io": "0.1.6",
     "cz-conventional-changelog": "1.2.0",
@@ -40,7 +39,7 @@
     "exact-semver": "1.2.0",
     "ghooks": "1.3.2",
     "istanbul": "0.4.5",
-    "mocha": "3.2.0",
+    "jest-cli": "^17.0.3",
     "npm-run-all": "3.1.2",
     "nunjucks": "3.0.0",
     "rimraf": "2.5.4",
@@ -50,28 +49,43 @@
   },
   "dependencies": {
     "dgeni": "0.4.2",
-    "dgeni-packages": "0.16.0",
+    "dgeni-packages": "git://github.com/rodleviton/dgeni-packages.git#fix/require-is-not-a-constructor",
     "ejs": "2.5.5",
     "he": "1.1.0",
     "lodash": "4.17.2",
     "showdown": "1.5.1"
   },
   "config": {
-    "ghooks": {
-      "pre-commit": "npm run exact-semver",
-      "commit-msg": "./node_modules/cz-customizable-ghooks/lib/index.js $2",
-      "pre-push": "npm-run-all verify test:unit:once --silent"
-    },
     "commitizen": {
       "path": "node_modules/cz-customizable"
     },
     "cz-customizable": {
       "config": "config/release/commitMessageConfig.js"
+    },
+    "ghooks": {
+      "pre-commit": "npm run exact-semver",
+      "pre-push": "npm-run-all verify test:unit:coverage --silent"
     }
   },
   "repository": {
     "url": "https://github.com/swanky-docs/swanky-processor-ngdocs.git",
     "type": "git"
   },
-  "version": "1.0.0"
+  "jest": {
+    "testEnvironment": "node",
+    "rootDir": "src",
+    "collectCoverageFrom": [
+      "*.js",
+      "**/*.js",
+      "!__tests__/fixtures/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  }
 }

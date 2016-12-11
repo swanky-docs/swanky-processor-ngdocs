@@ -1,0 +1,8 @@
+{% import "lib/macros.html" as lib -%}
+
+{%- if doc.params %}
+<section class="{$ styles['api-section'] $}">
+  <h4 class="{$ styles.h4 $}">Arguments</h4>
+  {$ lib.paramTable(doc.params, styles) $}
+</section>
+{%- endif -%}

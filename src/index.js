@@ -1,7 +1,7 @@
 'use strict';
 
 const Dgeni = require('dgeni');
-const NgDocsBuilder = require('./lib/NgDocsBuilder');
+const NgDocsBuilder = require('./lib/ng-docs-builder');
 
 function swankyNgdocs(page, item) {
   const ngDocsBuilder = new NgDocsBuilder(item, page);
