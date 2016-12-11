@@ -1,4 +1,3 @@
-# START_CONFIT_GENERATED_CONTENT
 extends: defaults/configurations/google
 
 env:
@@ -8,6 +7,7 @@ env:
   commonjs: true    # For Webpack, CommonJS
 
   es6: true
+  jest: true
   mocha: true
 
 confit-globals: &confit-globals
@@ -15,7 +15,6 @@ confit-globals: &confit-globals
 ecmaFeatures:
   modules: true
 
-# END_CONFIT_GENERATED_CONTENT
 globals:
   <<: *confit-globals
 
@@ -30,3 +29,6 @@ rules:
 
   no-unused-vars:
     - 1
+
+  object-curly-spacing:
+    - 0

@@ -1,0 +1,56 @@
+{% extends "base.template.html" %}
+
+{% block content %}
+
+  {% block header %}
+  <header class="api-profile-header">
+    <h4 class="{$ styles.h4 $}"><strong>name:</strong> <code class="{$ styles.code $}">{$ doc.name $}</code></h4>
+  </header>
+  {% endblock %}
+
+  {% block description %}
+    <div class="{$ styles['api-profile-description'] $}">
+      {$ doc.description | marked $}
+    </div>
+  {% endblock %}
+
+  {% if doc.knownIssues %}
+    <h4 class="{$ styles.h4 $}">Known Issues</h4>
+    {% for issue in doc.knownIssues -%}
+      <div class="{$ styles['known-issue'] $}">
+        {$ issue | marked $}
+      </div>
+    {% endfor -%}
+  {% endif %}
+
+  {% if doc.deprecated %}
+  <fieldset class="{$ styles.deprecated $}">
+    <legend class="{$ styles.legend $}">Deprecated API</legend>
+    {$ doc.deprecated| marked $}
+  </fieldset>
+  {% endif %}
+
+  {% block dependencies %}
+    {%- if doc.requires %}
+      <h4 class="{$ styles.h4 $}">Dependencies</h4>
+      <ul class="{$ styles.ul $}">
+        {% for require in doc.requires %}<li class="{$ styles.li $}">{$ require | link $}</li>{% endfor %}
+      </ul>
+    {% endif -%}
+  {% endblock %}
+
+  {% block examples %}
+    {%- if doc.examples %}
+      <h4 class="{$ styles.h4 $}">Example</h4>
+      {%- for example in doc.examples -%}
+        <div class="{$ styles['code-preview'] $} component-example-{$ doc.aliases[0] $}">
+          {$ example | marked $}
+        </div>
+      {%- endfor -%}
+    {% endif -%}
+  {% endblock %}
+
+  {% block additional %}
+  {% endblock %}
+
+{% endblock %}
