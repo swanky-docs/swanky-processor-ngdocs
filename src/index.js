@@ -3,18 +3,13 @@
 const Dgeni = require('dgeni');
 const NgDocsBuilder = require('./lib/NgDocsBuilder');
 
-const swankyNgdocs = function(page, item, cb) {
+function swankyNgdocs(page, item) {
   const ngDocsBuilder = new NgDocsBuilder(item, page);
   const packages = [ngDocsBuilder.Package];
   const dgeni = new Dgeni(packages);
 
-  dgeni.generate().then(function(docs) {
-
-    docs.forEach((doc) => {
-      item.rawContent.push(doc.renderedContent);
-    });
-
-    cb(null);
+  return dgeni.generate().then(function(docs) {
+    return docs.map((doc) => doc.renderedContent);
   });
 };
 
