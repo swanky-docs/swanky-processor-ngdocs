@@ -8,7 +8,7 @@ An ngdocs processor for Angular documentation generated using the [Swanky Docs](
 Prerequisites: [Node.js](https://nodejs.org/en/) (>=4.x, 6.x preferred) and [Git](https://git-scm.com/).
 
 ``` bash
-$ npm install swanky-processor-ngdocs --save
+$ npm install swanky-processor-ngdocs --save-dev
 ```
 
 ### Usage
