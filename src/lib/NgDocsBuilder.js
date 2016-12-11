@@ -5,12 +5,12 @@ const _ = require('lodash');
 const path = require('path');
 const Package = require('dgeni').Package;
 
+// Create empty page object ready to collect data
 let page = {};
 
 const NgDocsBuilder = function(item, doc) {
   page.item = item;
   page.data = doc;
-
 };
 
 NgDocsBuilder.prototype.Package = new Package('ngdocs-builder', [
