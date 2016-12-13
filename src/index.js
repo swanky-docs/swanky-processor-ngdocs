@@ -11,6 +11,6 @@ function swankyNgdocs(page, item) {
   return dgeni.generate().then(function(docs) {
     return docs.map((doc) => doc.renderedContent);
   });
-};
+}
 
 module.exports = swankyNgdocs;
