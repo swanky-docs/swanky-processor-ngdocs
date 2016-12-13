@@ -984,9 +984,9 @@ dezalgo@^1.0.1:
     asap "^2.0.0"
     wrappy "1"
 
-"dgeni-packages@git://github.com/rodleviton/dgeni-packages.git#fix/require-is-not-a-constructor":
+"dgeni-packages@git://github.com/angular/dgeni-packages":
   version "0.16.0"
-  resolved "git://github.com/rodleviton/dgeni-packages.git#0b3078eabe1337625279629d481dd03a4f5fed3d"
+  resolved "git://github.com/angular/dgeni-packages#96cb8139e8876150b5a6ce08f2c5eef7fbd791f6"
   dependencies:
     canonical-path "0.0.2"
     catharsis "^0.8.1"

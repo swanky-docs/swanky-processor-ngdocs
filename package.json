@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "dgeni": "0.4.2",
-    "dgeni-packages": "git://github.com/rodleviton/dgeni-packages.git#fix/require-is-not-a-constructor",
+    "dgeni-packages": "git://github.com/angular/dgeni-packages",
     "ejs": "2.5.5",
     "he": "1.1.0",
     "lodash": "4.17.2",
