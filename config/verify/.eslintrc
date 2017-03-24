@@ -1,4 +1,9 @@
-extends: defaults/configurations/google
+extends:
+  - defaults/configurations/google
+  - 'plugin:node/recommended'
+
+plugins:
+  - node
 
 env:
   jasmine: true
@@ -17,26 +22,28 @@ ecmaFeatures:
 
 parserOptions: &confit-parserOptions
   ecmaVersion: 6
-  sourceType: module
   ecmaFeatures:
     globalReturn: false
-    impliedStrict: true
-
+    impliedStrict: false
 
 globals:
   <<: *confit-globals
 
 rules:
   max-len:
-    - 2       # Warning
+    - error
     - 200     # Line Length
 
   dot-location:
-    - 1       #error
+    - warn
     - property
 
   no-unused-vars:
-    - 1
+    - warn
 
   object-curly-spacing:
-    - 0
+    - off
+
+  strict:
+    - error
+    - global  # at top of file

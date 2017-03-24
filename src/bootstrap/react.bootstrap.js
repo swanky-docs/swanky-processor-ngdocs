@@ -1,17 +1,18 @@
 // Functions required by the host project to support live editing of components for React
 // This file should be imported by the host project's <framework>.bootstrap file
 
-import React from 'react';                                // Assume React and ReactDOM are included by host project
+// Assume React and ReactDOM are included by host project
+import React from 'react';
 import ReactDOM from 'react-dom';
 import debounce from 'javascript-debounce';
-const babel = require('babel-standalone/babel.min');      // This is needed to parse the <script type="text/babel"> blocks
+const babel = require('babel-standalone/babel.min');      // Import does not work with this module! This is needed to parse the <script type="text/babel"> blocks
 
 
 /*
  * @param dependentModulesArr   Format: {ComponentName: function ComponentName(...) {}, DatePicker: function DatePicker()...}
  */
 export default function(dependentModulesMap) {
-  const WIN = window; // eslint-disable-line
+  const WIN = window;
 
   // Export the default-export of each module onto the WINDOW object.
   // E.g.: window.DatePicker = function() ...
@@ -25,7 +26,7 @@ export default function(dependentModulesMap) {
     let result = babel.transform(`_secretReactRenderMethod(${newContent}, elem);`, {presets: ['es2015', 'react']});
 
     // Strangely, Babel doesn't eval the code automatically
-    eval(result.code);            // eslint-disable-line
+    eval(result.code);
   }
 
 

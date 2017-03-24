@@ -1,3 +1,5 @@
+'use strict';
+
 const areaTag = require('../area')();
 
 describe('area tag-def', () => {

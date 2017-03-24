@@ -10,8 +10,8 @@ export default function(dependentModulesArr) {
 
   angular.module(ROOT_MOD_NAME, dependentModulesArr);
 
-  angular.element(document).ready(() => {             // eslint-disable-line
-    angular.bootstrap(document, [ROOT_MOD_NAME]);     // eslint-disable-line
+  angular.element(document).ready(() => {
+    angular.bootstrap(document, [ROOT_MOD_NAME]);
   });
 
 
@@ -36,7 +36,7 @@ export default function(dependentModulesArr) {
     angularCompile(elem, event.srcElement.value);
   }
 
-  window.onChangeLiveEditAngular = onChangeLiveEditAngular;  // eslint-disable-line
+  window.onChangeLiveEditAngular = onChangeLiveEditAngular;
   // debounce(onChangeLiveEditAngular, 200);
 
   return {
