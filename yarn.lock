@@ -984,9 +984,9 @@ dezalgo@^1.0.1:
     asap "^2.0.0"
     wrappy "1"
 
-"dgeni-packages@git://github.com/angular/dgeni-packages":
-  version "0.16.0"
-  resolved "git://github.com/angular/dgeni-packages#96cb8139e8876150b5a6ce08f2c5eef7fbd791f6"
+dgeni-packages@0.16.1:
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/dgeni-packages/-/dgeni-packages-0.16.1.tgz#bf63d52f62ca39760db3a789772d0a7ce2b55a2e"
   dependencies:
     canonical-path "0.0.2"
     catharsis "^0.8.1"
@@ -2126,11 +2126,15 @@ istanbul@0.4.5, istanbul@^0.4.5:
     which "^1.1.1"
     wordwrap "^1.0.0"
 
+javascript-debounce@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/javascript-debounce/-/javascript-debounce-1.0.0.tgz#6c7fc8485e73faa422fe5a96351edb257fb0a400"
+
 jest-changed-files@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-17.0.2.tgz#f5657758736996f590a51b87e5c9369d904ba7b7"
 
-jest-cli@^17.0.3:
+jest-cli@17.0.3:
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-17.0.3.tgz#700b8c02a9ea0ec9eab0cd5a9fd42d8a858ce146"
   dependencies:
