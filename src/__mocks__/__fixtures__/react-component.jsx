@@ -1,9 +1,7 @@
 /**
- * @ngdoc directive
+ * @ngdoc react.component
  *
  * @name component:button
- *
- * @scope
  *
  * @description
  * A description.

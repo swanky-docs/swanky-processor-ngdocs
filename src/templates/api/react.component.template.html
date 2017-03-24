@@ -1,0 +1,32 @@
+{% extends "api/api.template.html" %}
+
+{# Override the api.template.html's "examples" template #}
+{% block examples %}
+  {%- if doc.examples %}
+    <h4 class="{$ styles.h4 $}">Example</h4>
+    {%- for example in doc.examples -%}
+      <div class="{$ styles['code-preview'] $} component-example-{$ doc.aliases[0] + loop.index $}"></div>
+      <script>
+        window.addEventListener('load', () => {
+          reactCompile(document.querySelector('.component-example-{$ doc.aliases[0] + loop.index $}'), `{$ example | marked $}`);
+        });
+      </script>
+      {$ lib.liveEdit('onChangeLiveEditReact', 'component-example-' + doc.aliases[0] + loop.index, example) $}
+    {%- endfor -%}
+  {% endif -%}
+{% endblock %}
+
+{# Remove the Angular-centric things  #}
+{% block additional %}
+  {% block usage %}
+    <div class="{$ styles['code-snippet'] $}">
+      {% if doc.usage %}
+        {% include "lib/usage.template.html" %}
+      {%- endif %}
+    </div>
+  {% endblock -%}
+
+  {% include "lib/params.template.html" %}
+  {% include "lib/events.template.html" %}
+{% endblock %}
+

@@ -4,7 +4,8 @@ const path = require('path');
 const swankyNgdocs = require('./../index');
 
 let mockPage;
-let mockItem;
+let mockJSItem;
+let mockJSXItem;
 
 beforeEach(() => {
   mockPage = {
@@ -14,9 +15,15 @@ beforeEach(() => {
     fileDependencies: []
   };
 
-  mockItem = {
+  mockJSItem = {
     contentSrc: path.join(__dirname, './../__mocks__/__fixtures__/angular-component.js'),
+    preprocessor: {
+      'swanky-processor-ngdocs': {}
+    }
+  };
 
+  mockJSXItem = {
+    contentSrc: path.join(__dirname, './../__mocks__/__fixtures__/react-component.jsx'),
     preprocessor: {
       'swanky-processor-ngdocs': {}
     }
@@ -28,37 +35,45 @@ describe('swankyNgdocs', () => {
     expect(swankyNgdocs).toBeDefined();
   });
 
-  it('should return an array of processed ngdocs comments', (done) => {
-    swankyNgdocs(mockPage, mockItem).then((result) => {
+  it('should return an array of processed ngdocs comments for a JS file', (done) => {
+    swankyNgdocs(mockPage, mockJSItem).then((result) => {
+      expect(result.length).toBe(1);
+      done();
+    });
+  });
+
+  // This DOES NOT change the test coverage, so there's no reason for it to exist. Thoughts?
+  it('should return an array of processed ngdocs comments for a JSX file', (done) => {
+    swankyNgdocs(mockPage, mockJSXItem).then((result) => {
       expect(result.length).toBe(1);
       done();
     });
   });
 
   it('should handle a custom templates folder', (done) => {
-    mockItem.preprocessor = {
+    mockJSItem.preprocessor = {
       'swanky-processor-ngdocs': {
         templates: 'src/__mocks__/__fixtures__/templates'
       }
     };
 
-    swankyNgdocs(mockPage, mockItem).then((result) => {
+    swankyNgdocs(mockPage, mockJSItem).then((result) => {
       expect(result.length).toBe(1);
       done();
     });
   });
 
   it('should not duplicate file dependencies', (done) => {
-    const inititalFileDependenciesLength = 20;
+    const initialFileDependenciesLength = 22;   // This is __VERY__ brittle. Changes as we add/remove templates
 
-    // Add an existing template to fieldDependencies array
+    // Add an EXISTING template to fileDependencies array
     mockPage.fileDependencies = [{
       contentSrc: [path.join(process.cwd(), 'src/templates/api/type.template.html')],
       type: 'template'
     }];
 
-    swankyNgdocs(mockPage, mockItem).then(() => {
-      expect(mockPage.fileDependencies.length).toBe(inititalFileDependenciesLength);
+    swankyNgdocs(mockPage, mockJSItem).then(() => {
+      expect(mockPage.fileDependencies.length).toBe(initialFileDependenciesLength);
       done();
     });
   });

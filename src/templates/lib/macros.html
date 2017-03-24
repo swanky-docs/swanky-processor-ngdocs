@@ -58,3 +58,9 @@
   </tr>
 </table>
 {%- endmacro -%}
+
+{%- macro liveEdit(onChangeFn, outputElementCSSClassName, content) %}
+<textarea style="width: 100%" rows="10" oninput="{$ onChangeFn $}(event, '.{$ outputElementCSSClassName $}', document)">
+  {$ content $}
+</textarea>
+{% endmacro -%}

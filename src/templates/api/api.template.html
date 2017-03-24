@@ -1,3 +1,4 @@
+{% import "lib/macros.html" as lib -%}
 {% extends "base.template.html" %}
 
 {% block content %}
@@ -43,9 +44,10 @@
     {%- if doc.examples %}
       <h4 class="{$ styles.h4 $}">Example</h4>
       {%- for example in doc.examples -%}
-        <div class="{$ styles['code-preview'] $} component-example-{$ doc.aliases[0] $}">
+        <div class="{$ styles['code-preview'] $} component-example-{$ doc.aliases[0] + loop.index $}">
           {$ example | marked $}
         </div>
+        {$ lib.liveEdit('onChangeLiveEditAngular', 'component-example-' + doc.aliases[0] + loop.index, example) $}
       {%- endfor -%}
     {% endif -%}
   {% endblock %}

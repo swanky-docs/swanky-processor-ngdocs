@@ -17,6 +17,60 @@ NgDocsBuilder.prototype.Package = new Package('ngdocs-builder', [
   require('dgeni-packages/ngdoc')
 ])
 
+// Configure the jsdocFileReader to support JS & JSX
+.config(function(jsdocFileReader) {
+  jsdocFileReader.defaultPattern = /\.jsx?$/;
+})
+
+// Modified from jsdoc/index.js to support JSX
+.config(function(computeIdsProcessor, getAliases) {
+  computeIdsProcessor.idTemplates.push({
+    docTypes: ['jsx'],
+    getId: function(doc) {
+      let docPath = doc.name || doc.codeName;
+
+      if (!docPath) {
+        docPath = path.dirname(doc.fileInfo.relativePath);
+        if (doc.fileInfo.baseName !== 'index') {
+          docPath = path.join(docPath, doc.fileInfo.baseName);
+        }
+      }
+      return docPath;
+    },
+    getAliases: function(doc) {
+      return [doc.id];
+    }
+  });
+
+  // Support for react components:
+  computeIdsProcessor.idTemplates.push({
+    docTypes: ['react.component'],
+    idTemplate: 'module:${module}.${docType}:${name}',
+    getAliases: getAliases
+  });
+})
+
+.config(function(computePathsProcessor) {
+  computePathsProcessor.pathTemplates.push({
+    docTypes: ['jsx'],
+    pathTemplate: '${id}',
+    outputPathTemplate: '${path}.html'
+  });
+
+  // Support for react components:
+  computePathsProcessor.pathTemplates.push({
+    docTypes: ['react.component'],
+    pathTemplate: '${area}/${module}/${docType}/${name}',
+    outputPathTemplate: 'partials/${area}/${module}/${docType}/${name}.html'
+  });
+})
+
+.config(function(parseTagsProcessor, getInjectables) {
+  // Remove the existing 'area' tagDefinition so that our local one can replace it.
+  parseTagsProcessor.tagDefinitions = getInjectables(require('../tag-defs')).concat(parseTagsProcessor.tagDefinitions
+    .filter(tagDef => tagDef.name != 'area'));
+})
+
 // Configure output
 .config(function(log, readFilesProcessor, writeFilesProcessor, templateFinder, renderDocsProcessor) {
 

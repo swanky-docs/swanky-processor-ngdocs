@@ -15,6 +15,14 @@ confit-globals: &confit-globals
 ecmaFeatures:
   modules: true
 
+parserOptions: &confit-parserOptions
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    globalReturn: false
+    impliedStrict: true
+
+
 globals:
   <<: *confit-globals
 
