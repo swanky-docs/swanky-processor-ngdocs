@@ -6,7 +6,12 @@ import debounce from 'javascript-debounce';
 
 const ROOT_MOD_NAME = 'swanky$$ModuleRoot';
 
-export default function(dependentModulesArr) {
+/*
+ * @param dependentModulesArr   Format: {'com.feature.moduleName': moduleObj, ...}
+ */
+export default function(dependentModulesMap) {
+
+  let dependentModulesArr = Object.keys(dependentModulesMap);
 
   angular.module(ROOT_MOD_NAME, dependentModulesArr);
 
