@@ -58,3 +58,14 @@
   </tr>
 </table>
 {%- endmacro -%}
+
+{%- macro liveEdit(onChangeFn, outputElementCSSClassName, content) %}
+<textarea id="{$ outputElementCSSClassName $}_editor" style="width: 100%; display:none" rows="10" oninput="{$ onChangeFn $}(event, '.{$ outputElementCSSClassName $}', document)">
+  {$ content $}
+</textarea>
+<script> window.addEventListener('load', () => {
+  if ({$ onChangeFn $}) {
+    document.querySelector('#{$ outputElementCSSClassName $}_editor').style.display = 'block';
+  }
+});</script>
+{% endmacro -%}
