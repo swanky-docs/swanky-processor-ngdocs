@@ -1,32 +1,34 @@
+'use strict';
+
 // Functions required by the host project to support live editing of components for Angular
 // This file should be imported by the host project's <framework>.bootstrap file
 
-import angular from 'angular';
-import debounce from 'javascript-debounce';
+const angular = require('angular');
+const debounce = require('javascript-debounce');
 
 const ROOT_MOD_NAME = 'swanky$$ModuleRoot';
 
 /*
  * @param dependentModulesArr   Format: {'com.feature.moduleName': moduleObj, ...}
  */
-export default function(dependentModulesMap) {
+module.exports = function(dependentModulesMap) {
 
-  let dependentModulesArr = Object.keys(dependentModulesMap);
+  var dependentModulesArr = Object.keys(dependentModulesMap);
 
   angular.module(ROOT_MOD_NAME, dependentModulesArr);
 
-  angular.element(document).ready(() => {
+  angular.element(document).ready(function() {
     angular.bootstrap(document, [ROOT_MOD_NAME]);
   });
 
 
   // Support Live-edit behaviour:
   function angularCompile(rawElem, newContent) {
-    let $injector = angular.injector(['ng', ROOT_MOD_NAME]);
+    var $injector = angular.injector(['ng', ROOT_MOD_NAME]);
 
     // use the injector to kick off your application
     $injector.invoke(['$rootScope', '$compile', function($rootScope, $compile) {
-      let elem = angular.element(rawElem);
+      var elem = angular.element(rawElem);
 
       elem.empty();
       elem.append(newContent);
@@ -36,7 +38,7 @@ export default function(dependentModulesMap) {
   }
 
   function onChangeLiveEditAngular(event, targetCSSClassName, doc) {
-    let elem = doc.querySelector(targetCSSClassName);
+    var elem = doc.querySelector(targetCSSClassName);
 
     angularCompile(elem, event.srcElement.value);
   }
@@ -45,7 +47,7 @@ export default function(dependentModulesMap) {
   // debounce(onChangeLiveEditAngular, 200);
 
   return {
-    onChangeLiveEditAngular,
-    debounce
+    onChangeLiveEditAngular: onChangeLiveEditAngular,
+    debounce: debounce
   };
 };
