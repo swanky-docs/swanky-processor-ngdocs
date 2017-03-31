@@ -7,7 +7,6 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 const debounce = require('javascript-debounce');
-const babel = require('babel-standalone/babel.min');      // Import does not work with this module! This is needed to parse the <script type="text/babel"> blocks
 
 
 /*
@@ -27,7 +26,8 @@ module.exports = function(dependentModulesMap) {
   function reactCompile(elem, newContent) {
     elem.textContent = '';  // Clear the existing content
 
-    var result = babel.transform('_secretReactRenderMethod(' + newContent + ', elem);', { presets: ['es2015', 'react'] });
+    // Babel is defined in the React live-update template via an external script
+    var result = Babel.transform('_secretReactRenderMethod(' + newContent + ', elem);', { presets: ['es2015', 'react'] });
 
     // Strangely, Babel doesn't eval the code automatically
     eval(result.code);

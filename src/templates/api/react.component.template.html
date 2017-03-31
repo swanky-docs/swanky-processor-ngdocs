@@ -6,6 +6,7 @@
     <h4 class="{$ styles.h4 $}">Example</h4>
     {%- for example in doc.examples -%}
       <div class="{$ styles['code-preview'] $} component-example-{$ doc.aliases[0] + loop.index $}"></div>
+      <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
       <script>
         window.addEventListener('load', () => {
           reactCompile(document.querySelector('.component-example-{$ doc.aliases[0] + loop.index $}'), `{$ example | marked $}`);
