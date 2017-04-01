@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "babel-standalone": "6.23.1",
+    "codemirror": "5.25.0",
     "dgeni": "0.4.2",
     "dgeni-packages": "0.16.1",
     "ejs": "2.5.5",

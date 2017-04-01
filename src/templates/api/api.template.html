@@ -4,9 +4,9 @@
 {% block content %}
 
   {% block header %}
-  <header class="api-profile-header">
-    <h4 class="{$ styles.h4 $}"><strong>name:</strong> <code class="{$ styles.code $}">{$ doc.name $}</code></h4>
-  </header>
+    <header class="api-profile-header">
+      <h4 class="{$ styles.h4 $}"><strong>name:</strong> <code class="{$ styles.code $}">{$ doc.name $}</code></h4>
+    </header>
   {% endblock %}
 
   {% block description %}
@@ -25,17 +25,18 @@
   {% endif %}
 
   {% if doc.deprecated %}
-  <fieldset class="{$ styles.deprecated $}">
-    <legend class="{$ styles.legend $}">Deprecated API</legend>
-    {$ doc.deprecated| marked $}
-  </fieldset>
+    <fieldset class="{$ styles.deprecated $}">
+      <legend class="{$ styles.legend $}">Deprecated API</legend>
+      {$ doc.deprecated| marked $}
+    </fieldset>
   {% endif %}
 
   {% block dependencies %}
     {%- if doc.requires %}
       <h4 class="{$ styles.h4 $}">Dependencies</h4>
       <ul class="{$ styles.ul $}">
-        {% for require in doc.requires %}<li class="{$ styles.li $}">{$ require | link $}</li>{% endfor %}
+        {% for require in doc.requires %}
+          <li class="{$ styles.li $}">{$ require | link $}</li>{% endfor %}
       </ul>
     {% endif -%}
   {% endblock %}
