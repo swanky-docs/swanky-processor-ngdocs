@@ -1,5 +1,7 @@
 'use strict';
 
+console.warn('Important notice: This library is deprecated and not actively developed anymore.');
+
 const Dgeni = require('dgeni');
 const NgDocsBuilder = require('./lib/ng-docs-builder');
 

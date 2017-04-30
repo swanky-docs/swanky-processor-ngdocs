@@ -1,3 +1,7 @@
+[DEPRECATED] swanky-processor-ngdocs
+
+please use [swanky-processor-jsdocs](https://github.com/swanky-docs/swanky-processor-jsdoc) instead.
+
 # swanky-processor-ngdocs 
 [![Build Status](https://travis-ci.org/swanky-docs/swanky-processor-ngdocs.svg?branch=master)](https://travis-ci.org/swanky-docs/swanky-processor-ngdocs) [![npm package](https://img.shields.io/npm/v/swanky-processor-ngdocs.svg)](https://www.npmjs.com/package/swanky-processor-ngdocs) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![codecov](https://codecov.io/gh/swanky-docs/swanky-processor-ngdocs/branch/master/graph/badge.svg)](https://codecov.io/gh/swanky-docs/swanky-processor-ngdocs)
 
