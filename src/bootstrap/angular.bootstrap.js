@@ -6,6 +6,11 @@
 const angular = require('angular');
 const debounce = require('javascript-debounce');
 
+// Code Editor
+const CodeMirror = require ('codemirror/lib/codemirror');
+require('codemirror/lib/codemirror.css');
+require('codemirror/mode/javascript/javascript.js');
+
 const ROOT_MOD_NAME = 'swanky$$ModuleRoot';
 
 /*
@@ -37,14 +42,28 @@ module.exports = function(dependentModulesMap) {
     }]);
   }
 
-  function onChangeLiveEditAngular(event, targetCSSClassName, doc) {
-    var elem = doc.querySelector(targetCSSClassName);
-
-    angularCompile(elem, event.srcElement.value);
+  function onChangeLiveEditAngular(target, value) {
+    angularCompile(target, value);
   }
 
-  window.onChangeLiveEditAngular = onChangeLiveEditAngular;
-  // debounce(onChangeLiveEditAngular, 200);
+  // Create a new Code Mirror instance for each editor
+  const liveEditors = document.getElementsByClassName('live-editor');
+
+  for (var i = 0; i < liveEditors.length; i++) {
+    (function(index) {
+      var editor = liveEditors[index];
+
+      CodeMirror.fromTextArea(editor, {
+        lineNumbers: true,
+        lineWrapping: true,
+        mode: "htmlmixed"
+      }).on('change', function (codeMirror) {
+        var outputEl = document.getElementsByClassName(editor.dataset.output)[0];
+
+        onChangeLiveEditAngular(outputEl, codeMirror.getValue());
+      });
+    })(i);
+  }
 
   return {
     onChangeLiveEditAngular: onChangeLiveEditAngular,

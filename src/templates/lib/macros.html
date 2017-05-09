@@ -1,35 +1,38 @@
 {% macro typeList(types, styles) -%}
-{% for typeName in types %}<a href="" class="{$ typeName | typeClass $} {$ styles.a $}">{$ typeName | escape $}</a>{% endfor %}
+  {% for typeName in types %}<a href="" class="{$ typeName | typeClass $} {$ styles.a $}">{$ typeName | escape
+    $}</a>{% endfor %}
 {%- endmacro -%}
 
 {%- macro paramTable(params, styles) %}
-<table class="{$ styles.table $} {$ styles['variables-matrix'] $} {$ styles['input-arguments'] $}">
-  <thead class="{$ styles.thead $}">
+  <table class="{$ styles.table $} {$ styles['variables-matrix'] $} {$ styles['input-arguments'] $}">
+    <thead class="{$ styles.thead $}">
     <tr class="{$ styles.tr $}">
       <th class="{$ styles.th $}">Param</th>
       <th class="{$ styles.th $}">Type</th>
       <th class="{$ styles.th $}">Details</th>
     </tr>
-  </thead>
-  <tbody class="{$ styles.thbody $}">
+    </thead>
+    <tbody class="{$ styles.thbody $}">
     {% for param in params %}
-    <tr class="{$ styles.tr $}">
-      <td class="{$ styles.td $}">
-        {$ param.name $}
-        {% if param.alias %}| {$ param.alias $}{% endif %}
-        {% if param.optional %}<div><em class="{$ styles.em $}">(optional)</em></div>{% endif %}
-      </td>
-      <td class="{$ styles.td $}">
-        {$ typeList(param.typeList, styles) $}
-      </td>
-      <td class="{$ styles.td $}">
-        {$ param.description | marked $}
-        {% if param.defaultValue %}<p><em>(default: {$ param.defaultValue $})</em></p>{% endif %}
-      </td>
-    </tr>
+      <tr class="{$ styles.tr $}">
+        <td class="{$ styles.td $}">
+          {$ param.name $}
+          {% if param.alias %}| {$ param.alias $}{% endif %}
+          {% if param.optional %}
+            <div><em class="{$ styles.em $}">(optional)</em></div>
+          {% endif %}
+        </td>
+        <td class="{$ styles.td $}">
+          {$ typeList(param.typeList, styles) $}
+        </td>
+        <td class="{$ styles.td $}">
+          {$ param.description | marked $}
+          {% if param.defaultValue %}<p><em>(default: {$ param.defaultValue $})</em></p>{% endif %}
+        </td>
+      </tr>
     {% endfor %}
-  </tbody>
-</table>
+    </tbody>
+  </table>
 {% endmacro -%}
 
 
@@ -42,30 +45,29 @@
 {%- macro functionSyntax(fn) %}
   {%- set sep = joiner(', ') -%}
   {% marked -%}
-    `{$ fn.name $}({%- for param in fn.params %}{$ sep() $}
-    {%- if param.type.optional %}[{% endif -%}
-    {$ param.name $}
-    {%- if param.type.optional %}]{% endif -%}
-    {% endfor %});`
+  `{$ fn.name $}({%- for param in fn.params %}{$ sep() $}
+  {%- if param.type.optional %}[{% endif -%}
+  {$ param.name $}
+  {%- if param.type.optional %}]{% endif -%}
+{% endfor %});`
   {%- endmarked %}
 {% endmacro -%}
 
 {%- macro typeInfo(fn, styles) -%}
-<table class="{$ styles.table $} {$ styles['variables-matrix'] $} {$ styles['return-arguments'] $}">
-  <tr class="{$ styles.tr $}">
-    <td class="{$ styles.td $}">{$ typeList(fn.typeList, styles) $}</td>
-    <td class="{$ styles.td $}">{$ fn.description | marked $}</td>
-  </tr>
-</table>
+  <table class="{$ styles.table $} {$ styles['variables-matrix'] $} {$ styles['return-arguments'] $}">
+    <tr class="{$ styles.tr $}">
+      <td class="{$ styles.td $}">{$ typeList(fn.typeList, styles) $}</td>
+      <td class="{$ styles.td $}">{$ fn.description | marked $}</td>
+    </tr>
+  </table>
 {%- endmacro -%}
 
-{%- macro liveEdit(onChangeFn, outputElementCSSClassName, content) %}
-<textarea id="{$ outputElementCSSClassName $}_editor" style="width: 100%; display:none" rows="10" oninput="{$ onChangeFn $}(event, '.{$ outputElementCSSClassName $}', document)">
+{%- macro liveEdit(onChangeFn, outputElementCSSClassName, content, styles) %}
+  <h4 class="{$ styles.h4 $}">Live Edit</h4>
+
+  <textarea id="{$ outputElementCSSClassName $}_editor" data-output="{$ outputElementCSSClassName $}"
+            class="live-editor"
+            style="display:none" rows="10">
   {$ content $}
 </textarea>
-<script> window.addEventListener('load', () => {
-  if ({$ onChangeFn $}) {
-    document.querySelector('#{$ outputElementCSSClassName $}_editor').style.display = 'block';
-  }
-});</script>
 {% endmacro -%}
